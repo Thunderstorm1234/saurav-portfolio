@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saurav Kumar | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --blue-900:#0b1b3b;     /* deep navy */
+      --blue:#1d4ed8;         /* royal blue */
+      --gold:#f1c40f;         /* gold */
+      --gold-600:#d4ac0d;     /* darker gold */
+      --glass: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.18);
+    }
+    body{ background: radial-gradient(1200px 800px at 20% 10%, #0f1b3a 0%, #04070f 50%, #000 100%);
+          color:#fff; }
+
+    /* Glassmorphism utility */
+    .glass{ background:var(--glass); border:1px solid var(--stroke); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); }
+    .gold-text{ color: var(--gold); }
+    .text-gradient{ background:linear-gradient(90deg,#60a5fa,var(--gold)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .btn{ @apply inline-flex items-center gap-2 px-5 py-3 rounded-2xl border font-semibold transition; border-color:var(--gold); color:#fff; }
+    .btn:hover{ box-shadow:0 0 24px rgba(241,196,15,.45), inset 0 0 12px rgba(255,255,255,.05); background:rgba(33,53,122,.35); }
+
+    /* Neon glow on hover */
+    .glow:hover{ box-shadow:0 10px 30px rgba(96,165,250,.35), 0 0 32px rgba(241,196,15,.35); transform: translateY(-6px); border-color: var(--gold); }
+
+    /* Floating animation */
+    @keyframes float{ 0%{ transform: translateY(0);} 50%{ transform: translateY(-8px);} 100%{ transform: translateY(0);} }
+    .float{ animation: float 6s ease-in-out infinite; }
+
+    /* Golden particles */
+    .particles{ position:fixed; inset:0; pointer-events:none; z-index:-1; }
+    .particle{ position:absolute; width:3px; height:3px; background:var(--gold); border-radius:50%; filter: drop-shadow(0 0 6px var(--gold)); opacity:.8; }
+
+    /* Section divider */
+    .divider{ height:3px; width:140px; margin:14px auto 40px; background:linear-gradient(90deg,var(--gold),transparent); border-radius:999px; }
+
+    /* Nav underline */
+    .navlink{ position:relative; }
+    .navlink:after{ content:""; position:absolute; left:6px; right:6px; bottom:-6px; height:2px; background:linear-gradient(90deg,var(--gold),#fff0); transform:scaleX(0); transform-origin:left; transition:.25s; }
+    .navlink:hover:after, .navlink.active:after{ transform:scaleX(1); }
+
+    /* Typing cursor */
+    .cursor:after{ content:"|"; margin-left:4px; color:var(--gold); animation: blink 1s step-end infinite; }
+    @keyframes blink{ 50%{ opacity:0; } }
+
+    /* Scrollbar (nice touch) */
+    ::-webkit-scrollbar{ width:10px; height:10px; }
+    ::-webkit-scrollbar-thumb{ background:linear-gradient(var(--gold), #3b82f6); border-radius:10px; }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-yellow-400/30 selection:text-white">
+  <!-- golden particle field -->
+  <canvas class="particles" id="particles"></canvas>
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 inset-x-0 z-50">
+    <nav class="glass mx-auto max-w-6xl mt-4 rounded-2xl px-5 py-3 flex items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,.35)]">
+      <a href="#home" class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full" style="background:var(--gold); filter: drop-shadow(0 0 8px var(--gold));"></span>
+        <span class="font-bold tracking-wide text-gradient">Saurav&nbsp;Kumar</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a class="navlink" href="#summary">Summary</a>
+        <a class="navlink" href="#skills">Skills</a>
+        <a class="navlink" href="#education">Education</a>
+        <a class="navlink" href="#experience">Experience</a>
+        <a class="navlink" href="#projects">Projects</a>
+        <a class="navlink" href="#awards">Awards</a>
+        <a class="navlink" href="#personal">Personal</a>
+        <a class="navlink" href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="btn hidden md:inline-flex">Get in touch →</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="pt-40 pb-20">
+    <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-10 items-center">
+      <div class="space-y-4">
+        <p class="uppercase tracking-widest text-xs text-white/70">B.Tech — Information Technology (2022–2026)</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+          Hi, I'm <span class="text-gradient">Saurav Kumar</span>
+        </h1>
+        <p class="text-white/80 text-lg">Entry‑level Software Engineer crafting secure, scalable apps with MERN, Django and modern cloud tooling.</p>
+        <p class="text-white/70"><span class="font-semibold">I work with:</span> C++, JavaScript, TypeScript, React, Node, Django, SQL, MongoDB, JWT/OTP, system design.</p>
+        <div class="text-white/80">
+          <span class="opacity-80">Focus:</span>
+          <span id="typing" class="cursor font-semibold gold-text"></span>
+        </div>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a class="btn" href="mailto:kumarsaurav6204013391@gmail.com">Email</a>
+          <a class="btn" href="tel:+916204013391">Call</a>
+          <a class="btn" target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/saurav-kumar-gupta-7850a0259/">LinkedIn</a>
+          <a class="btn" target="_blank" rel="noreferrer" href="https://github.com/Thunderstorm1234">GitHub</a>
+          <a class="btn" target="_blank" rel="noreferrer" href="https://wa.me/916204013391">WhatsApp</a>
+        </div>
+        <p class="text-sm text-white/60">Greater Noida, Uttar Pradesh, India — 201310</p>
+      </div>
+      <div class="glass rounded-3xl p-6 border flex flex-col gap-4 glow float">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="glass rounded-2xl p-4">
+            <p class="text-xs text-white/70">Phone</p>
+            <a class="font-semibold" href="tel:+916204013391">+91‑6204013391</a>
+          </div>
+          <div class="glass rounded-2xl p-4">
+            <p class="text-xs text-white/70">Email</p>
+            <a class="font-semibold" href="mailto:kumarsaurav6204013391@gmail.com">kumarsaurav6204013391@gmail.com</a>
+          </div>
+          <div class="glass rounded-2xl p-4">
+            <p class="text-xs text-white/70">LinkedIn</p>
+            <a class="font-semibold" target="_blank" href="https://www.linkedin.com/in/saurav-kumar-gupta-7850a0259/">/in/saurav‑kumar‑gupta‑7850a0259</a>
+          </div>
+          <div class="glass rounded-2xl p-4">
+            <p class="text-xs text-white/70">GitHub</p>
+            <a class="font-semibold" target="_blank" href="https://github.com/Thunderstorm1234">Thunderstorm1234</a>
+          </div>
+        </div>
+        <div class="text-xs text-white/60">Prefered languages: English (Intermediate), Hindi (Mother Tongue), German (Basics)</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="summary" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold gold-text text-center">Brief Summary</h2>
+      <p class="mt-4 glass rounded-2xl p-6 leading-relaxed text-white/90">
+        Entry‑level Software Engineer with strong problem‑solving skills and hands‑on experience in full‑stack web development using the MERN stack. Built and deployed real‑world projects including a Secure File Sharing System, Real‑Time Tracker, Uber Clone, and a Banking App (C++). Currently interning at Bluestock Fintech, working on scalable financial applications. Proficient in C++, JavaScript, TypeScript, and backend authentication (JWT, OTP, email verification). Actively strengthening DSA, system design, and Java Web technologies (JSP, Servlets, JDBC).
+      </p>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <!-- SKILLS / KEY EXPERTISE -->
+  <section id="skills" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold gold-text text-center">Key Expertise</h2>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- skill pills -->
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">C</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">C++</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">Java</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">JavaScript</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">TypeScript</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">NodeJS</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">ReactJS</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">Git & GitHub</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">Operating Systems</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">SQL</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">MongoDB (Basics)</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">DBMS</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">Spring (Basics)</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">System Design</span></div>
+        <div class="glass rounded-2xl p-4 glow"><span class="font-semibold">Gen AI</span></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold gold-text text-center">Education</h2>
+      <div class="mt-6 grid md:grid-cols-3 gap-4">
+        <div class="glass rounded-2xl p-5 glow">
+          <h3 class="font-semibold">Noida Institute of Engineering and Technology</h3>
+          <p class="text-white/70">B.Tech — Information Technology</p>
+          <p class="text-white/60 text-sm">2022 – 2026 • Percentage: 77.20 / 100</p>
+        </div>
+        <div class="glass rounded-2xl p-5 glow">
+          <h3 class="font-semibold">RPS Public School, Bihar Sharif</h3>
+          <p class="text-white/70">12th — CBSE</p>
+          <p class="text-white/60 text-sm">2020 • Percentage: 75.20 / 100</p>
+        </div>
+        <div class="glass rounded-2xl p-5 glow">
+          <h3 class="font-semibold">Sadar Alam Memorial Secondary School, Bihar Sharif</h3>
+          <p class="text-white/70">10th — CBSE</p>
+          <p class="text-white/60 text-sm">2018 • Percentage: 80.40 / 100</p>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold gold-text text-center">Professional Experience</h2>
+      <div class="mt-6 grid lg:grid-cols-2 gap-4">
+        <div class="glass rounded-2xl p-6 glow">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <h3 class="font-semibold">Bluestock Fintech | IT Product & Services</h3>
+            <span class="text-xs text-white/70">01 Jul, 2025 – Present</span>
+          </div>
+          <p class="text-white/80">Software Development Engineer — Intern</p>
+          <p class="text-white/60 text-sm">Key Skills: OOPs, React Native, TypeScript, PostgreSQL, Django</p>
+          <ul class="list-disc pl-5 mt-2 space-y-1 text-white/85">
+            <li>Developed backend APIs using <b>Django 5.0.6</b> & DRF for financial workflows.</li>
+            <li>Designed scalable <b>PostgreSQL</b> models for Companies, IPOs & document management including RHP/DRHP PDFs.</li>
+          </ul>
+        </div>
+        <div class="glass rounded-2xl p-6 glow">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <h3 class="font-semibold">EazyByts Infotech</h3>
+            <span class="text-xs text-white/70">01 Aug, 2024 – 31 Aug, 2024</span>
+          </div>
+          <p class="text-white/80">Web Developer — Intern</p>
+          <p class="text-white/60 text-sm">Key Skills: Java, Spring MVC, Spring Boot, SQL</p>
+          <ul class="list-disc pl-5 mt-2 space-y-1 text-white/85">
+            <li>Created a feature‑rich dashboard to manage products, users & orders.</li>
+            <li>Implemented role‑based access with a focus on clean architecture & maintainability.</li>
+          </ul>
+        </div>
+        <div class="glass rounded-2xl p-6 glow lg:col-span-2">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <h3 class="font-semibold">BHARAT INTERN</h3>
+            <span class="text-xs text-white/70">01 Oct, 2023 – 01 Nov, 2023</span>
+          </div>
+          <p class="text-white/80">Web Developer — Intern</p>
+          <p class="text-white/60 text-sm">Key Skills: HTML, CSS, JavaScript</p>
+          <ul class="list-disc pl-5 mt-2 space-y-1 text-white/85">
+            <li>Developed a Netflix UI clone using HTML, CSS & JavaScript.</li>
+            <li>Built a UI‑based temperature converter.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold gold-text text-center">Projects</h2>
+      <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <article class="glass rounded-2xl p-6 glow">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">DSA‑Coding‑Assistant</h3>
+            <span class="text-xs text-white/70">01 Aug, 2025 – 15 Aug, 2025</span>
+          </div>
+          <p class="text-white/70 text-sm">Team Size: 1 • Key Skills: HTML, CSS, JavaScript, Events</p>
+          <p class="mt-2 text-white/90">AI‑assisted coding companion for practicing DSA interactively and faster.</p>
+          <a class="btn mt-3" target="_blank" href="https://thunderstorm1234.github.io/DSA-Coding-Assistant/">Live Demo</a>
+        </article>
+
+        <article class="glass rounded-2xl p-6 glow">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">Realtime Tracker</h3>
+            <span class="text-xs text-white/70">01 May, 2025 – 15 May, 2025</span>
+          </div>
+          <p class="text-white/70 text-sm">Mentor: self • Team Size: 1 • Key Skills: JavaScript, Leaflet</p>
+          <p class="mt-2 text-white/90">Interactive maps with OpenStreetMap; live location updates for delivery & fleet use‑cases.</p>
+          <a class="btn mt-3" target="_blank" href="https://github.com/Thunderstorm1234/Realtime_Tracker">Repository</a>
+        </article>
+
+        <article class="glass rounded-2xl p-6 glow">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">Secure File Transfer</h3>
+            <span class="text-xs text-white/70">01 Apr, 2025 – 30 Apr, 2025</span>
+          </div>
+          <p class="text-white/70 text-sm">Mentor: Shalini Shrotiya • Team Size: 1 • Key Skills: Django, SQLite, Tokenization</p>
+          <p class="mt-2 text-white/90">DRF + JWT + email verification; AES‑encrypted, time‑limited links and role‑based access.</p>
+          <a class="btn mt-3" target="_blank" href="https://github.com/Thunderstorm1234/secure_file_transfer">Repository</a>
+        </article>
+
+        <article class="glass rounded-2xl p-6 glow">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">RideHive – Uber Clone App</h3>
+          </div>
+          <p class="text-white/70 text-sm">01 Dec, 2024 – 01 Apr, 2025 • Team Size: 3 • Key Skills: HTML, CSS, JavaScript, ReactJS, Microservices, NodeJS</p>
+          <p class="mt-2 text-white/90">MERN microservices for ride booking, user/driver management; JWT‑secured APIs; dockerized with real‑time tracking & notifications.</p>
+        </article>
+
+        <article class="glass rounded-2xl p-6 glow">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">Banking Application</h3>
+            <span class="text-xs text-white/70">01 Sep, 2024 – 01 Nov, 2024</span>
+          </div>
+          <p class="text-white/70 text-sm">Mentor: Self • Team Size: 1 • Key Skills: C++, OOPs</p>
+          <p class="mt-2 text-white/90">Console‑based C++ banking system: account creation, deposit, withdrawal, balance inquiry using OOPs.</p>
+          <a class="btn mt-3" target="_blank" href="https://github.com/Thunderstorm1234/Console-Based-Banking-Application">Repository</a>
+        </article>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <!-- AWARDS & CO-CURRICULAR -->
+  <section id="awards" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold gold-text text-center">Awards & Co‑Curricular</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-4">
+        <div class="glass rounded-2xl p-6 glow">
+          <h3 class="font-semibold">School Level Chess — Runner</h3>
+          <p class="text-white/70">Recognized for strategic thinking and competitive performance.</p>
+        </div>
+        <div class="glass rounded-2xl p-6 glow">
+          <h3 class="font-semibold">Chess</h3>
+          <p class="text-white/70">Active participation in chess as a co‑curricular activity.</p>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <!-- PERSONAL DETAILS -->
+  <section id="personal" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold gold-text text-center">Personal Information</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-4">
+        <div class="glass rounded-2xl p-6 glow">
+          <ul class="space-y-2 text-white/90">
+            <li><b>Gender:</b> Male</li>
+            <li><b>Marital Status:</b> Single</li>
+            <li><b>Date of Birth:</b> 18 Feb, 2003</li>
+            <li><b>Known Languages:</b> English (Intermediate), Hindi (Mother Tongue), German (Basics)</li>
+          </ul>
+        </div>
+        <div class="glass rounded-2xl p-6 glow">
+          <ul class="space-y-2 text-white/90">
+            <li><b>Current Address:</b> Plot 19, Knowledge Park 2, NIET, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh, 201310</li>
+            <li><b>Permanent Address:</b> Laheri Mohalla, Near Mahila College, Bihar Sharif (Nalanda), Bihar, 803101</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <!-- CONTACT / LINKS -->
+  <section id="contact" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold gold-text text-center">Contact & Links</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-4">
+        <div class="glass rounded-2xl p-6 glow">
+          <p>📞 <a href="tel:+916204013391" class="underline decoration-yellow-400/60">+91‑6204013391</a></p>
+          <p>✉️ <a href="mailto:kumarsaurav6204013391@gmail.com" class="underline decoration-yellow-400/60">kumarsaurav6204013391@gmail.com</a></p>
+          <p>🔗 LinkedIn: <a target="_blank" href="https://www.linkedin.com/in/saurav-kumar-gupta-7850a0259/" class="underline decoration-yellow-400/60">saurav‑kumar‑gupta‑7850a0259</a></p>
+          <p>💻 GitHub: <a target="_blank" href="https://github.com/Thunderstorm1234" class="underline decoration-yellow-400/60">Thunderstorm1234</a></p>
+          <p>💬 WhatsApp: <a target="_blank" href="https://wa.me/916204013391" class="underline decoration-yellow-400/60">6204013391</a></p>
+        </div>
+        <div class="glass rounded-2xl p-6 glow flex flex-col gap-3">
+          <a class="btn" href="#">Download Resume (PDF)</a>
+          <a class="btn" href="#home">Back to Top ↑</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="glass mt-10">
+    <div class="max-w-6xl mx-auto px-6 py-6 text-center text-white/70">
+      © <span id="year"></span> Saurav Kumar • Built in Blue/White/Gold Glassmorphism
+    </div>
+  </footer>
+
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Typing effect
+    const roles = [
+      'Secure File Transfer (JWT • AES • Email Verification)',
+      'Realtime Tracking • Leaflet • OpenStreetMap',
+      'Uber‑like Microservices with MERN',
+      'C++ Banking App • OOPs',
+      'DSA • System Design • Java Web (JSP/Servlets/JDBC)'
+    ];
+    let r = 0, c = 0, fwd = true; const target = document.getElementById('typing');
+    function type(){
+      const text = roles[r];
+      target.textContent = text.slice(0, c);
+      if(fwd){ c++; if(c>text.length+8){ fwd=false; } }
+      else { c--; if(c<0){ fwd=true; r=(r+1)%roles.length; } }
+      setTimeout(type, fwd? 60: 35);
+    }
+    type();
+
+    // Particles
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let w, h; const dots = Array.from({length: 120}, () => ({ x: Math.random(), y: Math.random(), s: Math.random()*1.5 + .5, vx: (Math.random()-.5)*0.0008, vy: (Math.random()-.5)*0.0008 }));
+    function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      dots.forEach(p=>{
+        p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>1) p.vx*=-1; if(p.y<0||p.y>1) p.vy*=-1;
+        ctx.beginPath();
+        ctx.arc(p.x*w, p.y*h, p.s, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(241,196,15,0.9)';
+        ctx.shadowBlur = 8; ctx.shadowColor = 'rgba(241,196,15,0.9)';
+        ctx.fill(); ctx.shadowBlur = 0;
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Active nav highlight on scroll
+    const sections = [...document.querySelectorAll('section[id]')];
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          document.querySelectorAll('.navlink').forEach(a=> a.classList.remove('active'));
+          const l = document.querySelector(`.navlink[href="#${e.target.id}"]`);
+          if(l) l.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
